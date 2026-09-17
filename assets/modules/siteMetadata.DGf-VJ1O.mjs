@@ -1,0 +1,2 @@
+import{t as e}from"./rolldown-runtime.Dh6celcD.mjs";function t(e,t){return{description:`Bartek Mazur - digital designer specializing in web design, UI/UX and no-code development. Let's create something cool!`,favicon:`/assets/media/lorTKSGp6srdioHgyFDNYufu40.png`,robots:`max-image-preview:large`,socialImage:`/assets/media/X3VsjeuqbUm2GLu4d3rXFsGqlFs.png`,title:`Bartek Mazur - Digital Designer & No-code developer`}}var n=e((()=>{}));export{t as n,n as t};
+//# sourceMappingURL=siteMetadata.DGf-VJ1O.mjs.map
