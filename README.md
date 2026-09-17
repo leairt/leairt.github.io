@@ -1,14 +1,19 @@
-# Portfolio reference replica
+# Lea Irt — personal portfolio
 
-Local reproduction of https://mazurbartek.com/ using its publicly served HTML, Framer runtime, fonts, media, canvas effects and motion settings. The original names, project content and contact destinations are intentionally retained to match the requested reference.
+Personalized from the original Framer reference at https://mazurbartek.com/.
+Profile source: https://www.linkedin.com/in/lea-irt-5a658329a/ (accessed 2026-09-17).
 
-Run `python3 server.py`, then visit http://localhost:8000. Use an HTTP server, not `file://`, because the site uses ES modules. Root and nine subpages are included.
+Run `python3 server.py` and open http://localhost:8000. Use HTTP, not `file://`, because the original site uses ES modules.
 
-- `index.html`: original layout and responsive styles, localized resource URLs.
-- `assets/modules/`: original compiled Framer components, motion and canvas code.
-- `assets/media/`: downloaded images, fonts and video.
-- `reference/`: downloaded HTML snapshots.
-- `scripts/localize.py`: regenerates local pages from snapshots.
-- `assets/manifest.json`: upstream-to-local resource mapping.
+## Personal content
 
-The original standalone analytics tag and editor bootstrap are removed; pages are marked noindex. Some third-party links and framework services may still require internet. Contact links still belong to the reference author. The in-app browser was unavailable, so visual parity and runtime interactions have not been verified in a browser.
+- `content/profile.json` contains the profile, verified education, LinkedIn destination and five selected projects.
+- `scripts/personalize.py` updates both original HTML and compiled Framer text so hydration preserves the personal content.
+- `profile.css` and `profile.js` replace reference photography/mockups with typographic covers, substitute graduation-year labels, route project links and disable the original form.
+- `scripts/build-profile-pages.py` generates project listings and detail pages from the profile. Original project URLs remain usable.
+- `scripts/localize.py` regenerates pages, then reapplies personalization.
+- `python3 scripts/build.py` creates the deployment output.
+
+Original hero canvas, pointer effects and motion components remain in `assets/modules/`. Personal project covers are abstract title cards, not screenshots. No profile photo, e-mail address, CV or GitHub URL was supplied; LinkedIn is the contact destination. No form submits to the reference author.
+
+`reference/` contains untouched historical snapshots for regeneration, not pages served as the portfolio. The old downloaded media remain for the preserved animation runtime but are not presented as Lea's photos or projects. The in-app browser was unavailable during the initial setup; visual and pointer interaction parity has not been verified.

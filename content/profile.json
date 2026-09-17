@@ -1,0 +1,17 @@
+{
+  "name": "Lea Irt",
+  "linkedin": "https://www.linkedin.com/in/lea-irt-5a658329a/",
+  "email": null,
+  "github": null,
+  "headline": "Software engineer",
+  "focus": "Visual computing & AI",
+  "bio": "Software engineer and VICAI master's student at École Polytechnique (2026–2028). BSc, University of Belgrade, School of Electrical Engineering (2022–2026).",
+  "research": "Bachelor's thesis: single-image 3D reconstruction with deep learning.",
+  "projects": [
+    {"slug":"druzabac","title":"Družabac","category":"APPLICATION DEVELOPMENT","description":"A community app for board-game players: profiles, exchanges and events.","cover":"BOARD / GAMES","oldSlug":"dj-portfolio-website","oldTitle":"Website Portfolio for DJ Max Klimek"},
+    {"slug":"artist-classification","title":"Artist Classification","category":"DEEP LEARNING","description":"A CNN that distinguishes paintings by five artists.","cover":"ART / AI","oldSlug":"meta-productivity-summit-2026","oldTitle":"Meta Productivity Summit 2026"},
+    {"slug":"ai-spaceship-arena","title":"AI Spaceship Arena","category":"ARTIFICIAL INTELLIGENCE","description":"Search algorithms, adversarial agents and interactive Pygame visualizations.","cover":"SEARCH / SPACE","oldSlug":"fly-society","oldTitle":"Fly Society"},
+    {"slug":"voterproof","title":"VoterProof","category":"DATA & MACHINE LEARNING","description":"Data pipelines and machine learning for electoral-roll anomaly detection.","cover":"DATA / PATTERNS","oldSlug":"santander-mobile-for-teens","oldTitle":"Santander App for Teens"},
+    {"slug":"bomgerman","title":"BoMGerman","category":"C++ / SFML","description":"A two-player arcade game with watercolor sprites and particle explosions.","cover":"PLAY / CREATE","oldSlug":"uup-festival","oldTitle":"UUP Festival"}
+  ]
+}

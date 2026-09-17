@@ -17,3 +17,9 @@ for p in (root/'reference').rglob('*.html'):
 for p in (root/'assets/modules').glob('*.mjs'):
  s=localize(p.read_text());p.write_text(s)
 print('Localized all pages and runtime modules.')
+
+# Apply the personal content whenever snapshots are regenerated.
+import subprocess,sys
+if (root/'content/profile.json').exists():
+ subprocess.run([sys.executable,str(root/'scripts/personalize.py')],check=True)
+ subprocess.run([sys.executable,str(root/'scripts/build-profile-pages.py')],check=True)
