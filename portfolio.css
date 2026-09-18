@@ -29,12 +29,12 @@ a:hover{text-decoration:none}
 @media(max-width:800px){.skills-grid{grid-template-columns:1fr 1fr;gap:25px}.skills-grid article,.skills-grid article:nth-child(n){grid-column:auto;transform:none;min-height:0}}
 @media(max-width:480px){.skills-grid{grid-template-columns:1fr}}
 /* Use Lea's supplied mark and its exact red (#d00000) as the site accent. */
-:root{--accent:#d00000;--accent-deep:#d00000}
+:root{--accent:#c6283d;--accent-deep:#c6283d}
 .hero h1{font-size:0;width:min(78vw,760px);aspect-ratio:2 / 1;background:url('/drawings/leairt.svg') center/contain no-repeat;color:transparent;letter-spacing:0}
 .hero-star{display:none}
-.burgundy,.art-03,.project-visual{background:#d00000}
-.hero h1,.projects-intro h1{color:#d00000}.hero-bottom p span,.logo span,.education-copy strong,.hobbies span,.school-art{color:#d00000}
-.education-grid:before{border-color:#d00000}.skill-number{color:#d00000}.project-visual{background-color:#d00000}.visual-1{color:#d00000}
-.date{color:#d00000}.dark .date,.burgundy .date{color:#fff9f4}
+.burgundy,.art-03,.project-visual{background:#c6283d}
+.hero h1,.projects-intro h1{color:#c6283d}.hero-bottom p span,.logo span,.education-copy strong,.hobbies span,.school-art{color:#c6283d}
+.education-grid:before{border-color:#c6283d}.skill-number{color:#c6283d}.project-visual{background-color:#c6283d}.visual-1{color:#c6283d}
+.date{color:#c6283d}.dark .date,.burgundy .date{color:#fff9f4}
 .logo{width:118px;height:46px;letter-spacing:0}.logo img{display:block;width:100%;height:100%;object-fit:contain;object-position:left center}.logo span{display:none}
 @media(max-width:480px){.logo{width:92px;height:38px}}
