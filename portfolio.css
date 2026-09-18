@@ -36,3 +36,5 @@ a:hover{text-decoration:none}
 .hero h1,.projects-intro h1{color:#d00000}.hero-bottom p span,.logo span,.education-copy strong,.hobbies span,.school-art{color:#d00000}
 .education-grid:before{border-color:#d00000}.skill-number{color:#d00000}.project-visual{background-color:#d00000}.visual-1{color:#d00000}
 .date{color:#d00000}.dark .date,.burgundy .date{color:#fff9f4}
+.logo{width:118px;height:46px;letter-spacing:0}.logo img{display:block;width:100%;height:100%;object-fit:contain;object-position:left center}.logo span{display:none}
+@media(max-width:480px){.logo{width:92px;height:38px}}
