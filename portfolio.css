@@ -36,5 +36,9 @@ a:hover{text-decoration:none}
 .hero h1,.projects-intro h1{color:#c6283d}.hero-bottom p span,.logo span,.education-copy strong,.hobbies span,.school-art{color:#c6283d}
 .education-grid:before{border-color:#c6283d}.skill-number{color:#c6283d}.project-visual{background-color:#c6283d}.visual-1{color:#c6283d}
 .date{color:#c6283d}.dark .date,.burgundy .date{color:#fff9f4}
+.nav{height:60px;padding-top:0;padding-bottom:0}.hero{height:min(850px,calc(100svh - 60px));min-height:560px}.hero h1{width:min(54vw,520px);margin-left:4vw}.hero-top,.hero-bottom>a{display:none}
+.project-card,.project-card:hover,.project-card .project-visual{transform:none!important;transition:none!important}.project-card:hover{box-shadow:none}
+.section-label,.skill-number,.project-top,.project-gallery span,.project-visual small,.polaroid-caption span:last-child{display:none}.project-card{margin-bottom:40px}.projects-intro{padding-top:72px}
+@media(max-width:800px){.nav{height:56px}.hero{height:calc(100svh - 56px);min-height:500px}.hero h1{width:min(70vw,390px);margin-left:0}}
 .logo{width:118px;height:46px;letter-spacing:0}.logo img{display:block;width:100%;height:100%;object-fit:contain;object-position:left center}.logo span{display:none}
 @media(max-width:480px){.logo{width:92px;height:38px}}
