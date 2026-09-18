@@ -15,3 +15,16 @@ a:hover{text-decoration:none}
 @media(max-width:800px){.education-grid,.skills-grid,.community-grid,.hobbies{grid-template-columns:1fr 1fr;gap:25px}.intro{grid-template-columns:1fr;min-height:0}.intro>div:last-child{margin-left:0}.experience,.skills,.awards{padding-left:6%;padding-right:6%}.education-card:nth-child(2),.education-card:nth-child(3),.hobbies>div:nth-child(2),.hobbies>div:nth-child(5),.community-grid article:nth-child(2n){transform:none}.project-card:nth-child(2n),.project-card:nth-child(3n){margin-left:0;margin-right:0}}
 @media(max-width:480px){.education-grid,.skills-grid,.community-grid,.hobbies{grid-template-columns:1fr}}
 .skill-language p{font-size:16px;line-height:1.7}.skill-language p span{font-size:12px;color:#827773;margin-right:10px}
+/* Skills are arranged as loose, asymmetrical clusters. */
+.skills-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:0 26px;max-width:1180px}
+.skills-grid article{grid-column:span 5;min-height:150px}
+.skills-grid article:nth-child(2){grid-column:7 / span 4;transform:translateY(52px)}
+.skills-grid article:nth-child(3){grid-column:2 / span 4;transform:translateY(-12px)}
+.skills-grid article:nth-child(4){grid-column:8 / span 5;transform:translateY(30px)}
+.skills-grid article:nth-child(5){grid-column:1 / span 3;transform:translateY(8px)}
+.skills-grid article:nth-child(6){grid-column:5 / span 5;transform:translateY(-24px)}
+.skills-grid article:nth-child(7){grid-column:3 / span 6;transform:translateY(18px)}
+.skills-grid article:nth-child(8){grid-column:10 / span 3;transform:translateY(-35px)}
+.skills-grid article:nth-child(9){grid-column:6 / span 6;transform:translateY(18px)}
+@media(max-width:800px){.skills-grid{grid-template-columns:1fr 1fr;gap:25px}.skills-grid article,.skills-grid article:nth-child(n){grid-column:auto;transform:none;min-height:0}}
+@media(max-width:480px){.skills-grid{grid-template-columns:1fr}}
