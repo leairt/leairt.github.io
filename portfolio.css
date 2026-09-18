@@ -14,3 +14,4 @@ a:hover{text-decoration:none}
 .intro p:nth-of-type(2),.experience-row p,.courses,.guitar-note,.community-grid p,.project-copy>p:not(.project-summary),.project-gallery p{display:none}.project-copy .project-summary{max-width:470px}
 @media(max-width:800px){.education-grid,.skills-grid,.community-grid,.hobbies{grid-template-columns:1fr 1fr;gap:25px}.intro{grid-template-columns:1fr;min-height:0}.intro>div:last-child{margin-left:0}.experience,.skills,.awards{padding-left:6%;padding-right:6%}.education-card:nth-child(2),.education-card:nth-child(3),.hobbies>div:nth-child(2),.hobbies>div:nth-child(5),.community-grid article:nth-child(2n){transform:none}.project-card:nth-child(2n),.project-card:nth-child(3n){margin-left:0;margin-right:0}}
 @media(max-width:480px){.education-grid,.skills-grid,.community-grid,.hobbies{grid-template-columns:1fr}}
+.skill-language p{font-size:16px;line-height:1.7}.skill-language p span{font-size:12px;color:#827773;margin-right:10px}
