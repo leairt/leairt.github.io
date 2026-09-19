@@ -40,7 +40,7 @@ a:hover{text-decoration:none}
 .project-card,.project-card:hover,.project-card .project-visual{transform:none!important;transition:none!important}.project-card:hover{box-shadow:none}
 .section-label,.skill-number,.project-top,.project-gallery span,.project-visual small,.polaroid-caption span:last-child{display:none}.project-card{margin-bottom:40px}.projects-intro{padding-top:72px}
 @media(max-width:800px){.nav{height:56px}.hero{height:calc(100svh - 56px);min-height:500px}.hero h1{width:min(70vw,390px);margin-left:0}}
-.education-grid{align-items:start}.polaroid{width:min(100%,220px);margin-left:auto;margin-right:auto}.education-card:nth-child(2) .school-art{background:#292828 url('/drawings/id2022black.png') center/cover no-repeat}.education-card:nth-child(3) .school-art{background:#f2eee8 url('/drawings/id2024.png') center/cover no-repeat}.education-card:nth-child(2) .school-art span,.education-card:nth-child(2) .school-art b,.education-card:nth-child(3) .school-art span,.education-card:nth-child(3) .school-art b{display:none}
-@media(max-width:800px){.polaroid{width:min(100%,190px)}}
+.education-grid{align-items:start}.polaroid{width:min(100%,170px);margin-left:auto;margin-right:auto}.education-card:nth-child(2) .school-art{background:#292828 url('/drawings/id2022black.png') center/contain no-repeat}.education-card:nth-child(3) .school-art{background:#f2eee8 url('/drawings/id2024.png') center/contain no-repeat}.education-card:nth-child(2) .school-art span,.education-card:nth-child(2) .school-art b,.education-card:nth-child(3) .school-art span,.education-card:nth-child(3) .school-art b{display:none}
+@media(max-width:800px){.polaroid{width:min(100%,150px)}}
 .logo{width:118px;height:46px;letter-spacing:0}.logo img{display:block;width:100%;height:100%;object-fit:contain;object-position:left center}.logo span{display:none}
 @media(max-width:480px){.logo{width:92px;height:38px}}
