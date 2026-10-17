@@ -1,0 +1,258 @@
+/* Application case study, using the portfolio's existing type and palette. */
+.slavuj-study .research-section + .research-section {
+  border-top: 1px solid var(--rule);
+}
+
+.slavuj-study .research-nav {
+  border-bottom: 0;
+}
+
+.slavuj-hero {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  align-items: center;
+  background: var(--charcoal);
+  color: var(--paper);
+}
+
+.slavuj-hero-copy {
+  padding: 36px;
+  background: var(--red);
+  align-self: stretch;
+}
+
+.slavuj-hero-copy > p:first-child {
+  font-size: var(--type-body);
+}
+
+.slavuj-hero h1 {
+  font-size: var(--type-page);
+  font-weight: 700;
+  margin: 18px 0;
+}
+
+.slavuj-lead {
+  font-size: var(--type-card);
+  line-height: 1.2;
+  letter-spacing: -0.035em;
+}
+
+.slavuj-hero > .slavuj-brand {
+  align-self: stretch;
+  border: 1px solid var(--rule);
+}
+
+.slavuj-hero .slavuj-bird {
+  width: clamp(220px, 24vw, 300px);
+}
+
+.slavuj-demo-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 32px;
+  min-height: 44px;
+  font-size: var(--type-body);
+}
+
+.slavuj-demo-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+
+.slavuj-demo-link svg {
+  width: 24px;
+  height: 24px;
+}
+
+.demo-section-heading {
+  margin-bottom: 28px;
+}
+
+.demo-section-heading h2 {
+  margin-bottom: 16px;
+}
+
+.demo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+  margin-top: 28px;
+}
+
+.demo-card {
+  min-width: 0;
+  background: var(--charcoal);
+  color: var(--paper);
+}
+
+.demo-grid--single { grid-template-columns: minmax(0, 1fr); max-width: 680px; }
+
+#getting-started .demo-grid { max-width: none; }
+#getting-started .demo-card {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: center;
+}
+#getting-started .demo-copy { min-width: 0; padding: 20px 24px; }
+
+#experience .demo-grid { max-width: none; }
+#experience .demo-card {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: center;
+}
+#experience .demo-copy { grid-column: 1; grid-row: 1; min-width: 0; padding: 20px 24px; }
+#experience .demo-card video { grid-column: 2; grid-row: 1; }
+
+@media (max-width: 760px) {
+  #getting-started .demo-card { grid-template-columns: minmax(0, 1fr); }
+  #getting-started .demo-copy { padding: 20px; }
+  #experience .demo-card { grid-template-columns: minmax(0, 1fr); }
+  #experience .demo-copy { grid-column: 1; grid-row: 1; padding: 20px; }
+  #experience .demo-card video { grid-column: 1; grid-row: 2; }
+}
+
+.demo-card video {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 32 / 17;
+  background: var(--charcoal);
+}
+
+.demo-card video:focus-visible {
+  outline: 3px solid var(--red);
+  outline-offset: 4px;
+}
+
+.demo-copy {
+  padding: 22px 24px 26px;
+}
+
+.demo-copy h3 {
+  margin: 0 0 14px;
+  font-size: var(--type-card);
+}
+
+.demo-copy p {
+  font-size: var(--type-body);
+  line-height: 1.6;
+}
+
+.slavuj-stack {
+  margin: 28px 0;
+}
+
+.slavuj-stack > div {
+  display: grid;
+  grid-template-columns: 190px 1fr;
+  gap: 28px;
+  padding: 22px 0;
+}
+
+.slavuj-stack dt {
+  font-weight: 700;
+}
+
+.slavuj-stack dd {
+  margin: 0;
+}
+
+.solo-quizzes {
+  padding: 4px 0 0;
+}
+
+.slavuj-overview {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(230px, .8fr);
+  align-items: start;
+  gap: 28px;
+}
+.slavuj-overview h2 { margin-bottom: 18px; }
+.slavuj-sketch { width: 100%; max-width: 320px; justify-self: end; }
+.slavuj-sketch img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 83.375%;
+  height: auto;
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+.slavuj-sketch a { display: block; position: relative; aspect-ratio: 1600 / 1334; }
+.slavuj-sketch figcaption { font-size: var(--type-caption); }
+@media (max-width: 600px) {
+  .slavuj-overview { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  .slavuj-sketch { width: min(100%, 320px); justify-self: center; }
+}
+
+.group-play-panel {
+  background: var(--red);
+  color: var(--paper);
+  padding: 30px;
+}
+
+.group-play-panel h2 {
+  max-width: 23ch;
+}
+
+.group-play-panel > p { max-width: 65ch; }
+.group-game-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px 28px;
+  margin: 24px 0 0;
+}
+.group-game-list dt { font-weight: 700; margin-bottom: 4px; }
+.group-game-list dd { margin: 0; line-height: 1.5; }
+.demo-copy p { max-width: 48ch; }
+@media (max-width: 600px) {
+  .group-game-list { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+}
+
+@media (max-width: 1100px) {
+  .slavuj-study .research-layout {
+    grid-template-columns: 150px minmax(0, 1fr);
+    gap: 28px;
+  }
+
+  .demo-grid {
+    gap: 20px;
+  }
+
+  .demo-copy {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 760px) {
+  .slavuj-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .slavuj-hero-copy {
+    padding: 28px;
+  }
+
+  .demo-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .slavuj-stack > div {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .group-play-panel {
+    padding: 24px;
+  }
+
+  }
+
+@media (max-width: 760px) {
+  .slavuj-hero .slavuj-bird { width: min(65%, 260px); }
+  .slavuj-hero > .slavuj-brand { min-width: 0; overflow: hidden; }
+  .demo-copy { padding: 20px; }
+  .group-play-panel { padding: 20px; }
+  }

@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#c6283d">
+    <title>Lea Irt</title>
+    <meta name="description" content="A comparison of three deep learning pipelines for single-image 3D reconstruction. Approach, results and original thesis by Lea Irt.">
+    <meta property="og:title" content="Lea Irt">
+    <meta property="og:description" content="A comparison of three deep learning pipelines for single-image 3D reconstruction. Approach, results and original thesis by Lea Irt.">
+    <meta property="og:type" content="website">
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+    <link rel="stylesheet" href="/styles/base.css">
+    <link rel="stylesheet" href="/styles/projects.css">
+    <link rel="stylesheet" href="/styles/document-preview.css">
+    <script src="/assets/document-preview.js" defer></script>
+  </head>
+  <body id="top" class="project-page">
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="nav">
+      <a class="logo" href="/" aria-label="Lea Irt — Home"><img src="/assets/leairt-darkgray.svg" alt="Lea Irt" width="109" height="45"></a>
+      <nav aria-label="Main navigation"><a href="/projects/" aria-current="page">Projects</a><a href="/#contact">Contact</a></nav>
+    </header>
+    <main id="main" class="study">
+      <a class="project-back" href="/projects/"><svg class="project-arrow" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M26 16H6m9-9-9 9 9 9"/></svg><span>All projects</span></a>
+      <header class="study-hero">
+        <div class="study-hero-copy">
+          <p>Bachelor’s Thesis (2026)</p>
+          <h1>Single-Image 3D Shape Reconstruction Using Deep Learning</h1>
+          <p class="study-hero-intro">Turning one image of a sofa into a 3D model. Built in <strong>Python and PyTorch</strong>, with three approaches compared on 100 unseen sofas.</p>
+        </div>
+        <img src="/assets/research/sofa.png" alt="A complete sofa reconstructed as a 3D mesh" width="562" height="404" fetchpriority="high">
+      </header>
+      <ul class="project-keywords" aria-label="Project keywords"><li>Deep learning</li><li>3D reconstruction</li><li>Computer graphics</li></ul>
+      <div class="research-layout">
+        <nav class="research-nav" aria-label="Project contents">
+          <a href="#overview">Overview</a>
+          <a href="#data">Dataset</a>
+          <a href="#method">Architecture</a>
+          <a href="#training">Implementation</a>
+          <a href="#results">Results</a>
+          <a href="#limitations">Limitations</a>
+          <a href="#read">Thesis &amp; slides</a>
+        </nav>
+        <div class="research-content">
+          <section class="research-section" id="overview" aria-labelledby="overview-title">
+            <h2 id="overview-title">Overview</h2>
+            <p>The goal is to turn <strong>a single 2D image into a complete 3D model</strong>, without a 3D scanner, multiple photographs or manual modelling. One image cannot reveal the whole object, so the model has to infer hidden surfaces from the shapes it learned during training.</p>
+            <p>For my bachelor’s thesis, I built and compared <strong>three deep learning pipelines</strong>, from preparing the 3D data and rendering images to training models and evaluating the reconstructed meshes.</p>
+            <div class="research-question">
+              <h3>The research question</h3>
+              <p>Is it better to learn the shape directly from an RGB image, or first extract information about its geometry? I compared RGB input with predicted surface normals, and with predicted normals combined with depth.</p>
+            </div>
+            <p>The project was completed at the School of Electrical Engineering, University of Belgrade, under the supervision of Prof. Dr. Goran Kvaščev, in July 2026.</p>
+          </section>
+          <section class="research-section" id="data" aria-labelledby="data-title">
+            <h2 id="data-title">Dataset &amp; preparation</h2>
+            <p>I limited the experiment to <strong>sofas from ModelNet40</strong>, using synthetic images of untextured models to focus on geometry. Of the 780 models, 680 were used for training and validation, and 100 were held out for testing. Splits are separated by object, so views of the same sofa never appear in different splits.</p>
+            <ul class="research-list">
+              <li><strong>Mesh preparation.</strong> Centre and scale the models, correct incorrectly oriented normals, and simplify the geometry.</li>
+              <li><strong>RGB rendering.</strong> Generate 256 × 256 images from 24 camera positions across a 120° frontal range. Lighting and appearance are controlled to focus the experiment on geometry.</li>
+              <li><strong>Geometry supervision.</strong> Use ray casting to generate reference normal and depth maps, with object masks separating foreground from background.</li>
+              <li><strong>Shape supervision.</strong> Sample 100,000 signed-distance points per model: 80% near the surface and 20% throughout the surrounding volume.</li>
+            </ul>
+            <div class="research-preparation">
+              <figure>
+                <img src="/assets/research/training-models.jpg" alt="A selection of sofa models used to generate training images" width="1568" height="1032" loading="lazy">
+                <figcaption>Examples from the sofa dataset</figcaption>
+              </figure>
+              <figure>
+                <img src="/assets/research/mesh-preparation.jpg" alt="A sofa in Blender with incorrectly oriented surfaces shown in red" width="1067" height="648" loading="lazy">
+                <figcaption>Checking surface normals</figcaption>
+              </figure>
+            </div>
+          </section>
+          <section class="research-section" id="method" aria-labelledby="method-title">
+            <h2 id="method-title">Architecture</h2>
+            <p>All three pipelines use a <strong>DeepSDF-style decoder</strong> to represent the 3D shape. What changes is the input to the encoder: the original image, predicted normals, or predicted normals and depth. Each encoder converts its input into a latent vector, a compact numerical description of the shape.</p>
+            <div class="research-table-wrap">
+              <table class="research-table">
+                <caption>Three reconstruction pipelines</caption>
+                <thead><tr><th scope="col">Pipeline</th><th scope="col">Input to the ResNet34 encoder</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">Direct RGB</th><td>The original three-channel image</td></tr>
+                  <tr><th scope="row">Normals</th><td>A three-channel normal map predicted from RGB</td></tr>
+                  <tr><th scope="row">Normals + depth</th><td>Predicted normals and depth combined into four channels</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <h3>Predicting visible geometry</h3>
+            <p><strong>Two U-Nets</strong> predict the visible geometry: one estimates which way each surface faces (surface normals), and the other estimates its distance from the camera (depth). Both have four encoder–decoder levels, skip connections and group normalization. Training measures errors only on the sofa, excluding the background.</p>
+            <p>The normal model learns from direction errors and mean squared error (MSE). The depth model combines absolute error (L1) and MSE. Brightness and gamma changes vary the training images while keeping the target geometry unchanged.</p>
+            <div class="research-maps">
+              <figure><img src="/assets/research/map-input.png" alt="RGB input image" width="294" height="225" loading="lazy"><figcaption>RGB input</figcaption></figure>
+              <figure><img src="/assets/research/map-normals.png" alt="Predicted surface normals" width="294" height="225" loading="lazy"><figcaption>Predicted normals</figcaption></figure>
+              <figure><img src="/assets/research/map-depth.png" alt="Predicted depth map" width="294" height="225" loading="lazy"><figcaption>Predicted depth</figcaption></figure>
+            </div>
+            <h3>Learning a 3D shape space</h3>
+            <p><strong>DeepSDF represents a shape through a signed distance function (SDF).</strong> For any point in 3D space, this function gives its distance from the object’s surface: positive outside, negative inside and zero on the surface. An eight-layer neural network predicts this value from the point’s coordinates and a 256-number latent vector.</p>
+            <p>The decoder and one latent vector per training sofa are learned together from sampled points and their reference distances. Once trained, the decoder can reconstruct a surface from its latent vector.</p>
+            <h3>From an image to a mesh</h3>
+            <p><strong>Three ResNet34 encoders</strong>, initialised with ImageNet weights, learn to predict this latent vector from their respective inputs. The trained decoder stays fixed. The normals-and-depth variant takes four channels: three for surface direction and one for depth.</p>
+            <p>To produce the final model, the decoder predicts surface distances on a <strong>128 × 128 × 128 grid</strong>. Marching Cubes turns those predictions into a mesh. A new image needs no extra optimisation of its shape vector.</p>
+          </section>
+          <section class="research-section" id="training" aria-labelledby="training-title">
+            <h2 id="training-title">Training &amp; implementation</h2>
+            <p>The system is implemented in <strong>Python and PyTorch</strong>. Geometry processing uses trimesh and point-cloud-utils. Pyrender generates RGB views, embreex accelerates ray casting, and scikit-image extracts meshes. SciPy is used for nearest-neighbour distances during evaluation.</p>
+            <p>Training is staged: first the two U-Nets, then the shape auto-decoder, and finally the three image encoders. The encoders share the same decoder, split and training protocol so their input representations can be compared consistently.</p>
+            <dl class="training-facts">
+              <div><dt>Geometry prediction</dt><dd>80 epochs for each U-Net, with AdamW and cosine learning-rate decay.</dd></div>
+              <div><dt>Shape representation</dt><dd>2,000 epochs for the auto-decoder and its per-shape latent vectors.</dd></div>
+              <div><dt>Image encoders</dt><dd>200 epochs per input variant, batch size 16, with views sampled dynamically during training.</dd></div>
+            </dl>
+          </section>
+          <section class="research-section" id="results" aria-labelledby="results-title">
+            <h2 id="results-title">Results &amp; interpretation</h2>
+            <p>The predicted normal and depth maps capture the visible geometry well, with most errors around edges and abrupt surface changes. On the test set, the mean normal error is <strong>4.63°</strong> and the mean absolute depth error is <strong>0.0196</strong>, with depth values normalised to the range 0–1.</p>
+            <p>The final meshes are evaluated on <strong>100 unseen sofas</strong> using Chamfer distance against the reference geometry. Smaller distances indicate a closer match.</p>
+            <div class="research-table-wrap">
+              <table class="research-table results-table">
+                <caption>Final mesh reconstruction: thesis Table 8</caption>
+                <thead><tr><th scope="col">Pipeline</th><th scope="col">Mean Chamfer</th><th scope="col">Median Chamfer</th></tr></thead>
+                <tbody>
+                  <tr class="best-result"><th scope="row">Direct RGB</th><td>0.0310</td><td>0.0242</td></tr>
+                  <tr><th scope="row">Normals</th><td>0.0328</td><td>0.0260</td></tr>
+                  <tr><th scope="row">Normals + depth</th><td>0.0324</td><td>0.0259</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="research-takeaway">
+              <h3>Direct RGB gave the best final reconstruction.</h3>
+              <p>The geometry-based encoders had a small advantage when given reference maps. Once the full pipelines used predicted maps, <strong>direct RGB achieved the lowest mean Chamfer distance, 0.0310</strong>. The differences were small, but the extra geometry prediction stages introduced errors that carried through to the final mesh.</p>
+            </div>
+            <figure class="reconstruction-feature">
+              <img src="/assets/research/reconstruction-overview.png" width="1564" height="1082" alt="Three sofa test inputs at left, each followed by three reconstructed shapes from different model pipelines. Overall sofa structure is recovered in these examples." loading="lazy">
+              <figcaption>Test inputs at left, followed by reconstructions from the three pipelines.</figcaption>
+            </figure>
+          </section>
+          <section class="research-section" id="limitations" aria-labelledby="limitations-title">
+            <h2 id="limitations-title">Limitations &amp; next steps</h2>
+            <p>The unsuccessful reconstructions fall into <strong>two main groups: unusual shapes and missing small details</strong>. These results are limited to synthetic sofa images, and have not been established for real photographs or other object categories.</p>
+            <ul class="research-list">
+              <li><strong>Unusual shapes drift towards common ones.</strong> Better representation of rare geometries, weighted sampling and a larger latent space are possible improvements.</li>
+              <li><strong>Small details disappear.</strong> Thin legs and narrow supports contribute little to the overall loss. Targeted near-surface sampling and a higher extraction resolution could help preserve them.</li>
+            </ul>
+            <figure class="limitations-comparison">
+              <div class="limitations-crops">
+                <svg viewBox="55 215 990 153" role="img" aria-label="Unusual sofa shape: input, RGB reconstruction, normals reconstruction, normals and depth reconstruction">
+                  <image href="/assets/document-previews/Lea-Irt-3D-Reconstruction-Presentation/011.webp" width="1400" height="788"/>
+                </svg>
+                <svg viewBox="430 510 930 139" role="img" aria-label="Thin supports and small details lost: input, RGB reconstruction, normals reconstruction, normals and depth reconstruction">
+                  <image href="/assets/document-previews/Lea-Irt-3D-Reconstruction-Presentation/011.webp" width="1400" height="788"/>
+                </svg>
+              </div>
+              <div class="limitations-labels" aria-hidden="true"><span>Input image</span><span>RGB</span><span>Normals</span><span>Normals + depth</span></div>
+            </figure>
+            <p>The next step is to investigate these specific failures and test targeted improvements to sampling, shape representation and mesh resolution. I would address them before adding more geometric inputs, materials, textures or object categories.</p>
+          </section>
+          <section class="research-section study-documents" id="read" aria-labelledby="documents-title">
+            <h2 id="documents-title">Thesis &amp; presentation</h2>
+            <p>The original documents include the full methodology, training curves, architecture details and additional comparisons. Both are in Serbian.</p>
+            <div class="document-previews"><article class="document-preview" data-unit="page" aria-label="Bachelor’s thesis preview">
+ <header class="document-preview-heading"><h3>Bachelor’s thesis</h3><span>Serbian · 49 pages</span></header>
+ <div class="document-stage document-stage--page" tabindex="0" role="group" aria-label="Bachelor’s thesis: scroll to read pages"><img src="/assets/document-previews/Lea-Irt-3D-Reconstruction-Thesis/001.webp" alt="Bachelor’s thesis, page 1 (Serbian)" width="1132" height="1600" loading="lazy" decoding="async"><img src="/assets/document-previews/Lea-Irt-3D-Reconstruction-Thesis/002.webp" alt="Bachelor’s thesis, page 2 (Serbian)" width="1132" height="1600" loading="lazy" decoding="async"><img src="/assets/document-previews/Lea-Irt-3D-Reconstruction-Thesis/003.webp" alt="Bachelor’s thesis, page 3 (Serbian)" width="1132" height="1600" loading="lazy" decoding="async"><img src="/assets/document-previews/Lea-Irt-3D-Reconstruction-Thesis/004.webp" alt="Bachelor’s thesis, page 4 (Serbian)" width="1132" height="1600" loading="lazy" decoding="async"><img src="/assets/document-previews/Lea-Irt-3D-Reconstruction-Thesis/005.webp" alt="Bachelor’s thesis, page 5 (Serbian)" width="1132" height="1600" loading="lazy" decoding="async"><img src="/assets/document-previews/Lea-Irt-3D-Reconstruction-Thesis/006.webp" alt="Bachelor’s thesis, page 6 (Serbian)" width="1132" height="1600" loading="lazy" decoding="async"><img src="/assets/document-previews/Lea-Irt-3D-Reconstruction-Thesis/007.webp" alt="Bachelor’s thesis, page 7 (Serbian)" width="1132" height="1600" loading="lazy" decoding="async"><img src="/assets/document-previews/Lea-Irt-3D-Reconstruction-Thesis/008.webp" alt="Bachelor’s thesis, page 8 (Serbian)" width="1132" height="1600" loading="lazy" decoding="async"><img src="/assets/document-previews/Lea-Irt-3D-Reconstruction-Thesis/009.webp" alt="Bachelor’s thesis, page 9 (Serbian)" width="1132" height="1600" loading="lazy" decoding="async"><img src="/assets/document-previews/Lea-Irt-3D-Reconstruction-Thesis/010.webp" alt="Bachelor’s thesis, page 10 (Serbian)" width="1132" height="1600" loading="lazy" decoding="async"><img src="/assets/document-previews/Lea-Irt-3D-Reconstruction-Thesis/011.webp" alt="Bachelor’s thesis, page 11 (Serbian)" width="1132" height="1600" loading="lazy" decoding="async"><img src="/assets/document-previews/Lea-Irt-3D-Reconstruction-Thesis/012.webp" alt="Bachelor’s thesis, page 12 (Serbian)" width="1132" height="1600" loading="lazy" decoding="async"><img src="/assets/document-previews/Lea-Irt-3D-Reconstruction-Thesis/013.webp" alt="Bachelor’s thesis, page 13 (Serbian)" width="1132" height="1600" loading="lazy" decoding="async"><img src="/assets/document-previews/Lea-Irt-3D-Reconstruction-Thesis/014.webp" alt="Bachelor’s thesis, page 14 (Serbian)" width="1132" height="1600" loading="lazy" decoding="async"><img src="/assets/document-previews/Lea-Irt-3D-Reconstruction-Thesis/015.webp" alt="Bachelor’s thesis, page 15 (Serbian)" width="1132" height="1600" loading="lazy" decoding="async"><img src="/assets/document-previews/Lea-Irt-3D-Reconstruction-Thesis/016.webp" alt="Bachelor’s thesis, page 16 (Serbian)" width="1132" height="1600" loading="lazy" decoding="async"><img src="/assets/document-previews/Lea-Irt-3D-Reconstruction-Thesis/017.webp" alt="Bachelor’s thesis, page 17 (Serbian)" width="1132" height="1600" loading="lazy" decoding="async"><img src="/assets/document-previews/Lea-Irt-3D-Reconstruction-Thesis/018.webp" alt="Bachelor’s thesis, page 18 (Serbian)" width="1132" height="1600" loading="lazy" decoding="async"><img src="/assets/document-previews/Lea-Irt-3D-Reconstruction-Thesis/019.webp" alt="Bachelor’s thesis, page 19 (Serbian)" width="1132" height="1600" loading="lazy" decoding="async"><img src="/assets/document-previews/Lea-Irt-3D-Reconstruction-Thesis/020.webp" alt="Bachelor’s thesis, page 20 (Serbian)" width="1132" height="1600" loading="lazy" decoding="async"><img src="/assets/document-previews/Lea-Irt-3D-Reconstruction-Thesis/021.webp" alt="Bachelor’s thesis, page 21 (Serbian)" width="1132" height="1600" loading="lazy" decoding="async"><img src="/assets/document-previews/Lea-Irt-3D-Reconstruction-Thesis/022.webp" alt="Bachelor’s thesis, page 22 (Serbian)" width="1132" height="1600" loading="lazy" decoding="async"><img src="/assets/document-previews/Lea-Irt-3D-Reconstruction-Thesis/023.webp" alt="Bachelor’s thesis, page 23 (Serbian)" width="1132" height="1600" loading="lazy" decoding="async"><img src="/assets/document-previews/Lea-Irt-3D-Reconstruction-Thesis/024.webp" alt="Bachelor’s thesis, page 24 (Serbian)" width="1132" height="1600" loading="lazy" decoding="async"><img src="/assets/document-previews/Lea-Irt-3D-Reconstruction-Thesis/025.webp" alt="Bachelor’s thesis, page 25 (Serbian)" width="1132" height="1600" loading="lazy" decoding="async"><img src="/assets/document-previews/Lea-Irt-3D-Reconstruction-Thesis/026.webp" alt="Bachelor’s thesis, page 26 (Serbian)" width="1132" height="1600" loading="lazy" decoding="async"><img src="/assets/document-previews/Lea-Irt-3D-Reconstruction-Thesis/027.webp" alt="Bachelor’s thesis, page 27 (Serbian)" width="1132" height="1600" loading="lazy" decoding="async"><img src="/assets/document-previews/Lea-Irt-3D-Reconstruction-Thesis/028.webp" alt="Bachelor’s thesis, page 28 (Serbian)" width="1132" height="1600" loading="lazy" decoding="async"><img src="/assets/document-previews/Lea-Irt-3D-Reconstruction-Thesis/029.webp" alt="Bachelor’s thesis, page 29 (Serbian)" width="1132" height="1600" loading="lazy" decoding="async"><img src="/assets/document-previews/Lea-Irt-3D-Reconstruction-Thesis/030.webp" alt="Bachelor’s thesis, page 30 (Serbian)" width="1132" height="1600" loading="lazy" decoding="async"><img src="/assets/document-previews/Lea-Irt-3D-Reconstruction-Thesis/031.webp" alt="Bachelor’s thesis, page 31 (Serbian)" width="1132" height="1600" loading="lazy" decoding="async"><img src="/assets/document-previews/Lea-Irt-3D-Reconstruction-Thesis/032.webp" alt="Bachelor’s thesis, page 32 (Serbian)" width="1132" height="1600" loading="lazy" decoding="async"><img src="/assets/document-previews/Lea-Irt-3D-Reconstruction-Thesis/033.webp" alt="Bachelor’s thesis, page 33 (Serbian)" width="1132" height="1600" loading="lazy" decoding="async"><img src="/assets/document-previews/Lea-Irt-3D-Reconstruction-Thesis/034.webp" alt="Bachelor’s thesis, page 34 (Serbian)" width="1132" height="1600" loading="lazy" decoding="async"><img src="/assets/document-previews/Lea-Irt-3D-Reconstruction-Thesis/035.webp" alt="Bachelor’s thesis, page 35 (Serbian)" width="1132" height="1600" loading="lazy" decoding="async"><img src="/assets/document-previews/Lea-Irt-3D-Reconstruction-Thesis/036.webp" alt="Bachelor’s thesis, page 36 (Serbian)" width="1132" height="1600" loading="lazy" decoding="async"><img src="/assets/document-previews/Lea-Irt-3D-Reconstruction-Thesis/037.webp" alt="Bachelor’s thesis, page 37 (Serbian)" width="1132" height="1600" loading="lazy" decoding="async"><img src="/assets/document-previews/Lea-Irt-3D-Reconstruction-Thesis/038.webp" alt="Bachelor’s thesis, page 38 (Serbian)" width="1132" height="1600" loading="lazy" decoding="async"><img src="/assets/document-previews/Lea-Irt-3D-Reconstruction-Thesis/039.webp" alt="Bachelor’s thesis, page 39 (Serbian)" width="1132" height="1600" loading="lazy" decoding="async"><img src="/assets/document-previews/Lea-Irt-3D-Reconstruction-Thesis/040.webp" alt="Bachelor’s thesis, page 40 (Serbian)" width="1132" height="1600" loading="lazy" decoding="async"><img src="/assets/document-previews/Lea-Irt-3D-Reconstruction-Thesis/041.webp" alt="Bachelor’s thesis, page 41 (Serbian)" width="1132" height="1600" loading="lazy" decoding="async"><img src="/assets/document-previews/Lea-Irt-3D-Reconstruction-Thesis/042.webp" alt="Bachelor’s thesis, page 42 (Serbian)" width="1132" height="1600" loading="lazy" decoding="async"><img src="/assets/document-previews/Lea-Irt-3D-Reconstruction-Thesis/043.webp" alt="Bachelor’s thesis, page 43 (Serbian)" width="1132" height="1600" loading="lazy" decoding="async"><img src="/assets/document-previews/Lea-Irt-3D-Reconstruction-Thesis/044.webp" alt="Bachelor’s thesis, page 44 (Serbian)" width="1132" height="1600" loading="lazy" decoding="async"><img src="/assets/document-previews/Lea-Irt-3D-Reconstruction-Thesis/045.webp" alt="Bachelor’s thesis, page 45 (Serbian)" width="1132" height="1600" loading="lazy" decoding="async"><img src="/assets/document-previews/Lea-Irt-3D-Reconstruction-Thesis/046.webp" alt="Bachelor’s thesis, page 46 (Serbian)" width="1132" height="1600" loading="lazy" decoding="async"><img src="/assets/document-previews/Lea-Irt-3D-Reconstruction-Thesis/047.webp" alt="Bachelor’s thesis, page 47 (Serbian)" width="1132" height="1600" loading="lazy" decoding="async"><img src="/assets/document-previews/Lea-Irt-3D-Reconstruction-Thesis/048.webp" alt="Bachelor’s thesis, page 48 (Serbian)" width="1132" height="1600" loading="lazy" decoding="async"><img src="/assets/document-previews/Lea-Irt-3D-Reconstruction-Thesis/049.webp" alt="Bachelor’s thesis, page 49 (Serbian)" width="1132" height="1600" loading="lazy" decoding="async"></div>
+ <div class="document-scroll-hint">Scroll to explore</div>
+ <a class="document-open" href="/assets/documents/Lea-Irt-3D-Reconstruction-Thesis.pdf" target="_blank" rel="noopener">Open PDF <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 25 25 7M7 7h18v18"/></svg></a>
+ </article><article class="document-preview" data-unit="slide" aria-label="Presentation preview">
+ <header class="document-preview-heading"><h3>Presentation</h3><span>Serbian · 12 slides</span></header>
+ <div class="document-stage document-stage--slide" tabindex="0" role="group" aria-label="Presentation: use left and right arrows to browse"><img src="/assets/document-previews/Lea-Irt-3D-Reconstruction-Presentation/001.webp" alt="Presentation, slide 1 (Serbian)" width="1400" height="788" loading="lazy" decoding="async"><img src="/assets/document-previews/Lea-Irt-3D-Reconstruction-Presentation/002.webp" alt="Presentation, slide 2 (Serbian)" width="1400" height="788" loading="lazy" decoding="async" hidden><img src="/assets/document-previews/Lea-Irt-3D-Reconstruction-Presentation/003.webp" alt="Presentation, slide 3 (Serbian)" width="1400" height="788" loading="lazy" decoding="async" hidden><img src="/assets/document-previews/Lea-Irt-3D-Reconstruction-Presentation/004.webp" alt="Presentation, slide 4 (Serbian)" width="1400" height="788" loading="lazy" decoding="async" hidden><img src="/assets/document-previews/Lea-Irt-3D-Reconstruction-Presentation/005.webp" alt="Presentation, slide 5 (Serbian)" width="1400" height="788" loading="lazy" decoding="async" hidden><img src="/assets/document-previews/Lea-Irt-3D-Reconstruction-Presentation/006.webp" alt="Presentation, slide 6 (Serbian)" width="1400" height="788" loading="lazy" decoding="async" hidden><img src="/assets/document-previews/Lea-Irt-3D-Reconstruction-Presentation/007.webp" alt="Presentation, slide 7 (Serbian)" width="1400" height="788" loading="lazy" decoding="async" hidden><img src="/assets/document-previews/Lea-Irt-3D-Reconstruction-Presentation/008.webp" alt="Presentation, slide 8 (Serbian)" width="1400" height="788" loading="lazy" decoding="async" hidden><img src="/assets/document-previews/Lea-Irt-3D-Reconstruction-Presentation/009.webp" alt="Presentation, slide 9 (Serbian)" width="1400" height="788" loading="lazy" decoding="async" hidden><img src="/assets/document-previews/Lea-Irt-3D-Reconstruction-Presentation/010.webp" alt="Presentation, slide 10 (Serbian)" width="1400" height="788" loading="lazy" decoding="async" hidden><img src="/assets/document-previews/Lea-Irt-3D-Reconstruction-Presentation/011.webp" alt="Presentation, slide 11 (Serbian)" width="1400" height="788" loading="lazy" decoding="async" hidden><img src="/assets/document-previews/Lea-Irt-3D-Reconstruction-Presentation/012.webp" alt="Presentation, slide 12 (Serbian)" width="1400" height="788" loading="lazy" decoding="async" hidden></div>
+ <div class="document-controls" hidden><button type="button" data-step="-1" aria-label="Previous slide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6"/></svg></button><span class="document-count" aria-live="polite" aria-atomic="true">Slide 1 / 12</span><button type="button" data-step="1" aria-label="Next slide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></button></div>
+ <a class="document-open" href="/assets/documents/Lea-Irt-3D-Reconstruction-Presentation.pdf" target="_blank" rel="noopener">Open PDF <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 25 25 7M7 7h18v18"/></svg></a>
+ </article></div>
+            <div class="resource-grid">
+              
+              
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+    <footer class="contact" id="contact">
+      <h2 class="contact-title">Contact</h2>
+      <div class="contact-main">
+        <div class="contact-links"><a href="mailto:lea.irt@polytechnique.edu" aria-label="Email Lea Irt"><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="m3 6 9 7 9-7"/></svg><span>Email · lea.irt@polytechnique.edu</span></a><a href="https://www.linkedin.com/in/lea-irt-5a658329a/" aria-label="Lea Irt on LinkedIn" target="_blank" rel="noopener noreferrer"><svg class="icon" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true" focusable="false"><circle cx="5.5" cy="5.2" r="1.9"/><path d="M3.9 9h3.2v12H3.9zM10 9h3.2v1.6c.8-1.2 2-1.9 3.5-1.9 3 0 4.3 1.9 4.3 5.2V21h-3.2v-6.4c0-1.8-.6-2.7-2.1-2.7s-2.5 1-2.5 2.7V21H10z"/></svg><span>LinkedIn · Lea Irt</span></a><a href="https://github.com/leairt" aria-label="Lea Irt on GitHub" target="_blank" rel="noopener noreferrer"><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-4 1-4-2-6-2m12 5v-3.5c0-1 .1-1.6-.5-2.2 3.3-.4 6.5-1.6 6.5-7A5.5 5.5 0 0 0 19.5 5c.1-1.1.1-2.3-.5-3-1.9 0-3.1 1-4 1.5a15 15 0 0 0-6 0C8.1 3 6.9 2 5 2c-.6.7-.6 1.9-.5 3A5.5 5.5 0 0 0 3 9.3c0 5.4 3.2 6.6 6.5 7-.6.6-.5 1.2-.5 2.2V22"/></svg><span>GitHub · leairt</span></a><a href="https://www.instagram.com/leairt/" aria-label="Lea Irt on Instagram, @leairt" target="_blank" rel="noopener noreferrer"><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg><span>Instagram · @leairt</span></a></div>
+      </div>
+      <div class="footline"><span>LEA IRT © 2026</span><span>BELGRADE / PARIS</span><a class="back-top" href="#top" aria-label="Back to top"><span>Back to top</span><svg class="icon top-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5m-6 6 6-6 6 6"/></svg></a></div>
+    </footer>
+  </body>
+</html>

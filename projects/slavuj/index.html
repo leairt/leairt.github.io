@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#c6283d">
+    <title>Lea Irt</title>
+    <meta name="description" content="Slavuj: a team-built music discovery web application. Creative playlist games, Spotify integration and six video demos.">
+    <meta property="og:title" content="Lea Irt">
+    <meta property="og:description" content="Slavuj: a team-built music discovery web application. Creative playlist games, Spotify integration and six video demos.">
+    <meta property="og:type" content="website">
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+    <link rel="stylesheet" href="/styles/base.css">
+    <link rel="stylesheet" href="/styles/projects.css">
+    <link rel="stylesheet" href="/styles/slavuj.css">
+  </head>
+  <body id="top" class="project-page">
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="nav">
+      <a class="logo" href="/" aria-label="Lea Irt — Home"><img src="/assets/leairt-darkgray.svg" alt="Lea Irt" width="109" height="45"></a>
+      <nav aria-label="Main navigation"><a href="/projects/" aria-current="page">Projects</a><a href="/#contact">Contact</a></nav>
+    </header>
+    <main id="main" class="study slavuj-study">
+      <a class="project-back" href="/projects/"><svg class="project-arrow" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M26 16H6m9-9-9 9 9 9"/></svg><span>All projects</span></a>
+      <header class="slavuj-hero">
+        <div class="slavuj-hero-copy">
+          <p>Web app · 2026</p>
+          <h1>Slavuj</h1>
+          <p class="slavuj-lead">Play Games.<br>Discover Music.</p>
+          <a class="slavuj-demo-link" href="#games">Watch the demos <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 4v16m-7-7 7 7 7-7"/></svg></a>
+        </div>
+        <div class="slavuj-brand" aria-label="Slavuj illustration">
+          <img class="slavuj-bird" src="/assets/slavuj/logo.png" alt="Hand-drawn nightingale" width="1024" height="1024">
+        </div>
+      </header>
+      <ul class="project-keywords" aria-label="Project keywords"><li>Web app</li><li>Django</li><li>Spotify API</li><li>UI design</li></ul>
+      <div class="research-layout">
+        <nav class="research-nav" aria-label="Project contents">
+          <a href="#overview">Overview</a>
+          <a href="#getting-started">Getting started</a>
+          <a href="#games">Games &amp; demos</a>
+          <a href="#group-play">Play with friends</a>
+          <a href="#experience">The application</a>
+          <a href="#implementation">Implementation</a>
+          <a href="#documentation">Documentation</a>
+        </nav>
+        <div class="research-content">
+          <section class="research-section" id="overview" aria-labelledby="overview-title">
+            <div class="slavuj-overview">
+              <div>
+                <h2 id="overview-title">Music discovery through play</h2>
+                <p>Slavuj is a web app for discovering music through <strong>creative games, solo quizzes and group games with friends</strong>. Turn your Spotify favourites into games, discover new tracks and take them back to your library.</p>
+                <p>I came up with the idea and built it with Dušan Korizma, Mark Možarovski and Marko Misovski for our <strong>Principles of Software Engineering</strong> course in 2026.</p>
+              </div>
+              <figure class="slavuj-sketch" id="logo-sketches">
+                <a href="/assets/slavuj/art.jpeg" target="_blank" rel="noopener" aria-label="Open my Slavuj logo sketches at full size">
+                  <img src="/assets/slavuj/art.jpeg" alt="Bird and lettering sketches for the Slavuj logo, drawn on paper" width="1334" height="1600" loading="lazy" decoding="async">
+                </a>
+                <figcaption>Sketches for the logo</figcaption>
+              </figure>
+            </div>
+          </section>
+          <section class="research-section" id="getting-started" aria-labelledby="getting-started-title">
+            <h2 id="getting-started-title">Getting started</h2>
+            <div class="demo-grid demo-grid--single"><article class="demo-card">
+                <video controls muted playsinline preload="none" poster="/assets/slavuj/login.webp" width="1600" height="850" aria-labelledby="login-title" aria-describedby="login-description">
+                  <source src="/assets/slavuj/login.mp4" type="video/mp4">
+                  <a href="/assets/slavuj/login.mp4">Watch the Getting started demo</a>.
+                </video>
+                <div class="demo-copy"><h3 id="login-title">Your first visit</h3><p id="login-description">The demo follows the landing page, Spotify authorisation and game selection. Connecting an account enables personalised music suggestions and playlist export.</p></div>
+              </article></div>
+          </section>
+          <section class="research-section" id="games" aria-labelledby="games-title">
+            <div class="demo-section-heading"><h2 id="games-title">Games &amp; demos</h2><p>Build playlists in three different ways, or test your knowledge of artists, albums and genres. These demos show each game in action.</p></div>
+            <div class="demo-grid">
+              <article class="demo-card">
+                <video controls muted playsinline preload="none" poster="/assets/slavuj/paint.webp" width="1600" height="850" aria-labelledby="paint-title" aria-describedby="paint-description">
+                  <source src="/assets/slavuj/paint.mp4" type="video/mp4">
+                  <a href="/assets/slavuj/paint.mp4">Watch the Cover Paint demo</a>.
+                </video>
+                <div class="demo-copy"><h3 id="paint-title">Cover Paint</h3><p id="paint-description">Pick a colour and explore matching album covers. Select tracks from the results to build a playlist around a visual theme.</p></div>
+              </article>
+              <article class="demo-card">
+                <video controls muted playsinline preload="none" poster="/assets/slavuj/secret_message.webp" width="1600" height="850" aria-labelledby="secret_message-title" aria-describedby="secret_message-description">
+                  <source src="/assets/slavuj/secret_message.mp4" type="video/mp4">
+                  <a href="/assets/slavuj/secret_message.mp4">Watch the Secret Message demo</a>.
+                </video>
+                <div class="demo-copy"><h3 id="secret_message-title">Secret Message</h3><p id="secret_message-description">Write a message, then choose songs whose title initials spell it out. Save the finished playlist to Spotify or share it with someone.</p></div>
+              </article>
+              <article class="demo-card">
+                <video controls muted playsinline preload="none" poster="/assets/slavuj/snake.webp" width="1600" height="850" aria-labelledby="snake-title" aria-describedby="snake-description">
+                  <source src="/assets/slavuj/snake.mp4" type="video/mp4">
+                  <a href="/assets/slavuj/snake.mp4">Watch the Playlist Snake demo</a>.
+                </video>
+                <div class="demo-copy"><h3 id="snake-title">Playlist Snake</h3><p id="snake-description">Build a chain where each song title starts with the last word of the previous title. Play Snake along the way and keep the tracks as a playlist.</p></div>
+              </article>
+              <article class="demo-card">
+                <video controls muted playsinline preload="none" poster="/assets/slavuj/top_5.webp" width="1600" height="850" aria-labelledby="top_5-title" aria-describedby="top_5-description">
+                  <source src="/assets/slavuj/top_5.mp4" type="video/mp4">
+                  <a href="/assets/slavuj/top_5.mp4">Watch the Top 5 demo</a>.
+                </video>
+                <div class="demo-copy"><h3 id="top_5-title">Top 5</h3><p id="top_5-description">Try to name an artist’s five most-streamed songs. Correct guesses appear in the ranking. Reveal the remaining tracks to discover what you missed.</p></div>
+              </article>
+            </div>
+            <div class="solo-quizzes">
+              <h3>More solo quizzes</h3>
+              <p><strong>Imposter</strong> asks you to spot the odd song, artist or album. <strong>Fan Check</strong> tests your knowledge of artists, bands, albums and genres.</p>
+            </div>
+          </section>
+          <section class="research-section" id="group-play" aria-labelledby="group-title">
+            <div class="group-play-panel">
+              <h2 id="group-title">How well do you know your friends’ music?</h2>
+              <p>Create a room and invite friends with a code or invitation. Rounds draw on the players’ music tastes, with scores to compare and a shared playlist to save afterwards.</p>
+              <dl class="group-game-list">
+                <div><dt>Music Roulette</dt><dd>Recognise tracks from your friends’ favourites.</dd></div>
+                <div><dt>Imposter</dt><dd>Find the song that does not belong.</dd></div>
+                <div><dt>Hitster</dt><dd>Put songs in chronological order.</dd></div>
+                <div><dt>Quiz Blitz</dt><dd>Race through a music quiz together.</dd></div>
+              </dl>
+            </div>
+          </section>
+          <section class="research-section" id="experience" aria-labelledby="experience-title">
+            <h2 id="experience-title">Profile &amp; playlists</h2>
+            <div class="demo-grid demo-grid--single">
+              <article class="demo-card">
+                <video controls muted playsinline preload="none" poster="/assets/slavuj/nav_bar.webp" width="1600" height="850" aria-labelledby="nav_bar-title" aria-describedby="nav_bar-description">
+                  <source src="/assets/slavuj/nav_bar.mp4" type="video/mp4">
+                  <a href="/assets/slavuj/nav_bar.mp4">Watch the Profile, history & playlists demo</a>.
+                </video>
+                <div class="demo-copy"><h3 id="nav_bar-title">Your music library</h3><p id="nav_bar-description">Revisit saved playlists, inspect their tracks and browse previous games. The profile also brings together friends and play statistics.</p></div>
+              </article>
+            </div>
+          </section>
+          <section class="research-section" id="implementation" aria-labelledby="implementation-title">
+            <h2 id="implementation-title">How it is built</h2>
+            <p><strong>Python and Django</strong> handle the server logic, while <strong>HTML, CSS and JavaScript</strong> power the interface and games.</p>
+            <dl class="slavuj-stack">
+              <div><dt>Accounts &amp; sessions</dt><dd>Django manages sign-in and sessions, with local accounts stored in Firestore.</dd></div>
+              <div><dt>Music &amp; game data</dt><dd>Firestore stores profiles, music data, game state, friendships and playlists.</dd></div>
+              <div><dt>Spotify API</dt><dd>The Spotify Web API supplies music data and saves playlists to the user’s connected account.</dd></div>
+            </dl>
+            
+          </section>
+          <section class="research-section" id="documentation" aria-labelledby="documentation-title">
+            <h2 id="documentation-title">Software engineering documentation</h2>
+            <p>Our team wrote the <strong>requirements, use cases, diagrams and database specification</strong>. These describe user flows, alternative paths and data relationships, giving us a shared plan for implementation.</p>
+          </section>
+        </div>
+      </div>
+    </main>
+    <footer class="contact" id="contact">
+      <h2 class="contact-title">Contact</h2>
+      <div class="contact-main">
+        <div class="contact-links"><a href="mailto:lea.irt@polytechnique.edu" aria-label="Email Lea Irt"><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="m3 6 9 7 9-7"/></svg><span>Email · lea.irt@polytechnique.edu</span></a><a href="https://www.linkedin.com/in/lea-irt-5a658329a/" aria-label="Lea Irt on LinkedIn" target="_blank" rel="noopener noreferrer"><svg class="icon" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true" focusable="false"><circle cx="5.5" cy="5.2" r="1.9"/><path d="M3.9 9h3.2v12H3.9zM10 9h3.2v1.6c.8-1.2 2-1.9 3.5-1.9 3 0 4.3 1.9 4.3 5.2V21h-3.2v-6.4c0-1.8-.6-2.7-2.1-2.7s-2.5 1-2.5 2.7V21H10z"/></svg><span>LinkedIn · Lea Irt</span></a><a href="https://github.com/leairt" aria-label="Lea Irt on GitHub" target="_blank" rel="noopener noreferrer"><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-4 1-4-2-6-2m12 5v-3.5c0-1 .1-1.6-.5-2.2 3.3-.4 6.5-1.6 6.5-7A5.5 5.5 0 0 0 19.5 5c.1-1.1.1-2.3-.5-3-1.9 0-3.1 1-4 1.5a15 15 0 0 0-6 0C8.1 3 6.9 2 5 2c-.6.7-.6 1.9-.5 3A5.5 5.5 0 0 0 3 9.3c0 5.4 3.2 6.6 6.5 7-.6.6-.5 1.2-.5 2.2V22"/></svg><span>GitHub · leairt</span></a><a href="https://www.instagram.com/leairt/" aria-label="Lea Irt on Instagram, @leairt" target="_blank" rel="noopener noreferrer"><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg><span>Instagram · @leairt</span></a></div>
+      </div>
+      <div class="footline"><span>LEA IRT © 2026</span><span>BELGRADE / PARIS</span><a class="back-top" href="#top" aria-label="Back to top"><span>Back to top</span><svg class="icon top-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5m-6 6 6-6 6 6"/></svg></a></div>
+    </footer>
+  </body>
+</html>

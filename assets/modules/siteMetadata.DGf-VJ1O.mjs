@@ -1,2 +1,0 @@
-import{t as e}from"./rolldown-runtime.Dh6celcD.mjs";function t(e,t){return{description:`Software engineer and VICAI master's student at École Polytechnique (2026–2028). BSc, University of Belgrade, School of Electrical Engineering (2022–2026).`,favicon:`/assets/media/lorTKSGp6srdioHgyFDNYufu40.png`,robots:`max-image-preview:large`,socialImage:void 0,title:`Lea Irt — Software Engineer · Visual Computing & AI`}}var n=e((()=>{}));export{t as n,n as t};
-//# sourceMappingURL=siteMetadata.DGf-VJ1O.mjs.map
