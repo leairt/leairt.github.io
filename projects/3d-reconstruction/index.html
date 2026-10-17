@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-US">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -45,7 +45,7 @@
         <div class="research-content">
           <section class="research-section" id="overview" aria-labelledby="overview-title">
             <h2 id="overview-title">Overview</h2>
-            <p>The goal is to turn <strong>a single 2D image into a complete 3D model</strong>, without a 3D scanner, multiple photographs or manual modelling. One image cannot reveal the whole object, so the model has to infer hidden surfaces from the shapes it learned during training.</p>
+            <p>The goal is to turn <strong>a single 2D image into a complete 3D model</strong>, without a 3D scanner, multiple photographs or manual modeling. One image cannot reveal the whole object, so the model has to infer hidden surfaces from the shapes it learned during training.</p>
             <p>For my bachelor’s thesis, I built and compared <strong>three deep learning pipelines</strong>, from preparing the 3D data and rendering images to training models and evaluating the reconstructed meshes.</p>
             <div class="research-question">
               <h3>The research question</h3>
@@ -57,7 +57,7 @@
             <h2 id="data-title">Dataset &amp; preparation</h2>
             <p>I limited the experiment to <strong>sofas from ModelNet40</strong>, using synthetic images of untextured models to focus on geometry. Of the 780 models, 680 were used for training and validation, and 100 were held out for testing. Splits are separated by object, so views of the same sofa never appear in different splits.</p>
             <ul class="research-list">
-              <li><strong>Mesh preparation.</strong> Centre and scale the models, correct incorrectly oriented normals, and simplify the geometry.</li>
+              <li><strong>Mesh preparation.</strong> Center and scale the models, correct incorrectly oriented normals, and simplify the geometry.</li>
               <li><strong>RGB rendering.</strong> Generate 256 × 256 images from 24 camera positions across a 120° frontal range. Lighting and appearance are controlled to focus the experiment on geometry.</li>
               <li><strong>Geometry supervision.</strong> Use ray casting to generate reference normal and depth maps, with object masks separating foreground from background.</li>
               <li><strong>Shape supervision.</strong> Sample 100,000 signed-distance points per model: 80% near the surface and 20% throughout the surrounding volume.</li>
@@ -99,12 +99,12 @@
             <p><strong>DeepSDF represents a shape through a signed distance function (SDF).</strong> For any point in 3D space, this function gives its distance from the object’s surface: positive outside, negative inside and zero on the surface. An eight-layer neural network predicts this value from the point’s coordinates and a 256-number latent vector.</p>
             <p>The decoder and one latent vector per training sofa are learned together from sampled points and their reference distances. Once trained, the decoder can reconstruct a surface from its latent vector.</p>
             <h3>From an image to a mesh</h3>
-            <p><strong>Three ResNet34 encoders</strong>, initialised with ImageNet weights, learn to predict this latent vector from their respective inputs. The trained decoder stays fixed. The normals-and-depth variant takes four channels: three for surface direction and one for depth.</p>
-            <p>To produce the final model, the decoder predicts surface distances on a <strong>128 × 128 × 128 grid</strong>. Marching Cubes turns those predictions into a mesh. A new image needs no extra optimisation of its shape vector.</p>
+            <p><strong>Three ResNet34 encoders</strong>, initialized with ImageNet weights, learn to predict this latent vector from their respective inputs. The trained decoder stays fixed. The normals-and-depth variant takes four channels: three for surface direction and one for depth.</p>
+            <p>To produce the final model, the decoder predicts surface distances on a <strong>128 × 128 × 128 grid</strong>. Marching Cubes turns those predictions into a mesh. A new image needs no extra optimization of its shape vector.</p>
           </section>
           <section class="research-section" id="training" aria-labelledby="training-title">
             <h2 id="training-title">Training &amp; implementation</h2>
-            <p>The system is implemented in <strong>Python and PyTorch</strong>. Geometry processing uses trimesh and point-cloud-utils. Pyrender generates RGB views, embreex accelerates ray casting, and scikit-image extracts meshes. SciPy is used for nearest-neighbour distances during evaluation.</p>
+            <p>The system is implemented in <strong>Python and PyTorch</strong>. Geometry processing uses trimesh and point-cloud-utils. Pyrender generates RGB views, embreex accelerates ray casting, and scikit-image extracts meshes. SciPy is used for nearest-neighbor distances during evaluation.</p>
             <p>Training is staged: first the two U-Nets, then the shape auto-decoder, and finally the three image encoders. The encoders share the same decoder, split and training protocol so their input representations can be compared consistently.</p>
             <dl class="training-facts">
               <div><dt>Geometry prediction</dt><dd>80 epochs for each U-Net, with AdamW and cosine learning-rate decay.</dd></div>
@@ -114,7 +114,7 @@
           </section>
           <section class="research-section" id="results" aria-labelledby="results-title">
             <h2 id="results-title">Results &amp; interpretation</h2>
-            <p>The predicted normal and depth maps capture the visible geometry well, with most errors around edges and abrupt surface changes. On the test set, the mean normal error is <strong>4.63°</strong> and the mean absolute depth error is <strong>0.0196</strong>, with depth values normalised to the range 0–1.</p>
+            <p>The predicted normal and depth maps capture the visible geometry well, with most errors around edges and abrupt surface changes. On the test set, the mean normal error is <strong>4.63°</strong> and the mean absolute depth error is <strong>0.0196</strong>, with depth values normalized to the range 0–1.</p>
             <p>The final meshes are evaluated on <strong>100 unseen sofas</strong> using Chamfer distance against the reference geometry. Smaller distances indicate a closer match.</p>
             <div class="research-table-wrap">
               <table class="research-table results-table">
